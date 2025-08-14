@@ -1,0 +1,30 @@
+<p>
+  나는 <span id="slot1" class="slot">____</span>을(를) 통해 
+  <span id="slot2" class="slot">____</span>에 가서 
+  <span id="slot3" class="slot">____</span>을(를) 할 것이다.
+</p>
+
+<div class="word-list" data-slot="1">
+  <button>모험</button>
+  <button>공부</button>
+  <button>휴식</button>
+</div>
+
+<div class="word-list" data-slot="2">
+  <button>산</button>
+  <button>바다</button>
+  <button>도시</button>
+</div>
+
+<div class="word-list" data-slot="3">
+  <button>노래하기</button>
+  <button>그림그리기</button>
+  <button>책읽기</button>
+</div>
+
+document.querySelectorAll('.word-list button').forEach(btn => {
+  btn.addEventListener('click', () => {
+    const parentSlot = btn.parentElement.dataset.slot;
+    document.getElementById(`slot${parentSlot}`).textContent = btn.textContent;
+  });
+});
