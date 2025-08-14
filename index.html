@@ -3,41 +3,45 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>문장 만들기 게임</title>
-  <link rel="stylesheet" href="style.css">
+  <title>문장 만들기</title>
 </head>
 <body>
-  <h1>🧩 나만의 문장 만들기</h1>
+  <h1>문장 만들기</h1>
 
-  <p class="sentence">
-    나는 <span id="slot1" class="slot">____</span>을(를) 통해
-    <span id="slot2" class="slot">____</span>에 가서
-    <span id="slot3" class="slot">____</span>을(를) 할 것이다.
+  <p>
+    나는 <span id="slot1">____</span>을(를) 통해
+    <span id="slot2">____</span>에 가서
+    <span id="slot3">____</span>을(를) 할 것이다.
   </p>
 
-  <section class="word-section">
-    <h2>1번 빈칸 선택</h2>
-    <div class="word-list" data-slot="1">
-      <button>모험</button>
-      <button>공부</button>
-      <button>휴식</button>
-    </div>
+  <h2>1번 빈칸</h2>
+  <div data-slot="1">
+    <button>모험</button>
+    <button>공부</button>
+    <button>휴식</button>
+  </div>
 
-    <h2>2번 빈칸 선택</h2>
-    <div class="word-list" data-slot="2">
-      <button>산</button>
-      <button>바다</button>
-      <button>도시</button>
-    </div>
+  <h2>2번 빈칸</h2>
+  <div data-slot="2">
+    <button>산</button>
+    <button>바다</button>
+    <button>도시</button>
+  </div>
 
-    <h2>3번 빈칸 선택</h2>
-    <div class="word-list" data-slot="3">
-      <button>노래하기</button>
-      <button>그림그리기</button>
-      <button>책읽기</button>
-    </div>
-  </section>
+  <h2>3번 빈칸</h2>
+  <div data-slot="3">
+    <button>노래하기</button>
+    <button>그림그리기</button>
+    <button>책읽기</button>
+  </div>
 
-  <script src="script.js"></script>
+  <script>
+    document.querySelectorAll('div[data-slot] button').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const slotNum = btn.parentElement.dataset.slot;
+        document.getElementById(`slot${slotNum}`).textContent = btn.textContent;
+      });
+    });
+  </script>
 </body>
 </html>
