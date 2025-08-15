@@ -1,47 +1,83 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>문장 만들기</title>
+<meta charset="UTF-8">
+<title>캐릭터 꾸미기</title>
+<style>
+  body {
+    font-family: sans-serif;
+    text-align: center;
+    background-color: #f0f0f0;
+  }
+  .canvas-wrapper {
+    position: relative;
+    width: 300px;
+    height: 300px;
+    margin: 40px auto; /* 가운데 정렬 */
+  }
+  .canvas-wrapper img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 300px;
+    height: 300px;
+    object-fit: contain;
+  }
+  .controls {
+    margin-top: 20px;
+  }
+  .controls h3 {
+    margin: 10px 0 5px;
+  }
+  .controls button {
+    margin: 3px;
+    padding: 5px 10px;
+    cursor: pointer;
+  }
+</style>
 </head>
 <body>
-  <h1>문장 만들기</h1>
 
-  <p>
-    나는 <span id="slot1">____</span>을(를) 통해
-    <span id="slot2">____</span>에 가서
-    <span id="slot3">____</span>을(를) 할 것이다.
-  </p>
+<h1>캐릭터 꾸미기 🎨</h1>
 
-  <h2>1번 빈칸</h2>
-  <div data-slot="1">
-    <button>모험</button>
-    <button>공부</button>
-    <button>휴식</button>
-  </div>
+<div class="canvas-wrapper">
+  <img id="bg" src="https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdna%2Ftzf65%2FbtsPUpbsPe1%2FAAAAAAAAAAAAAAAAAAAAAJzX4cMmfqv0di5Wwe_G326iWQ28O1PNdI4dyxV_6SAK%2Fimg.jpg%3Fcredential%3DyqXZFxpELC7KVnFOS48ylbz2pIh7yKj8%26expires%3D1756652399%26allow_ip%3D%26allow_referer%3D%26signature%3DUfusKVB5qVi2P5g5%252FFFf6oOFynk%253D" alt="배경">
+  <img id="body" src="https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdna%2FbD1jdr%2FbtsPVeNLW4b%2FAAAAAAAAAAAAAAAAAAAAAF_2vniDt1UHNX1RxJahpYJMgBE5wIS8-e8bzxsXuWeM%2Fimg.png%3Fcredential%3DyqXZFxpELC7KVnFOS48ylbz2pIh7yKj8%26expires%3D1756652399%26allow_ip%3D%26allow_referer%3D%26signature%3DgKnE5JHvLX2uvqmDFTy%252F%252FDnaIew%253D" alt="몸통">
+  <img id="head" src="https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdna%2FLMBZt%2FbtsPUKF8mar%2FAAAAAAAAAAAAAAAAAAAAABK40oHeKxcHA6lAMUtrLKS9CrUPjPwBO1btle8aEw16%2Fimg.png%3Fcredential%3DyqXZFxpELC7KVnFOS48ylbz2pIh7yKj8%26expires%3D1756652399%26allow_ip%3D%26allow_referer%3D%26signature%3DZ3Xe6P%252FJugGFt6J1OD%252B89gr6gt0%253D" alt="머리">
+  <img id="face" src="https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdna%2FLMBZt%2FbtsPUKF8mar%2FAAAAAAAAAAAAAAAAAAAAABK40oHeKxcHA6lAMUtrLKS9CrUPjPwBO1btle8aEw16%2Fimg.png%3Fcredential%3DyqXZFxpELC7KVnFOS48ylbz2pIh7yKj8%26expires%3D1756652399%26allow_ip%3D%26allow_referer%3D%26signature%3DZ3Xe6P%252FJugGFt6J1OD%252B89gr6gt0%253D" alt="표정">
+  <img id="hat" src="" alt="모자">
+  <img id="item" src="" alt="손에 든 것">
+</div>
 
-  <h2>2번 빈칸</h2>
-  <div data-slot="2">
-    <button>산</button>
-    <button>바다</button>
-    <button>도시</button>
-  </div>
+<div class="controls">
+  <h3>배경 선택</h3>
+  <button onclick="changePart('bg', 'https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdna%2Ftzf65%2FbtsPUpbsPe1%2FAAAAAAAAAAAAAAAAAAAAAJzX4cMmfqv0di5Wwe_G326iWQ28O1PNdI4dyxV_6SAK%2Fimg.jpg%3Fcredential%3DyqXZFxpELC7KVnFOS48ylbz2pIh7yKj8%26expires%3D1756652399%26allow_ip%3D%26allow_referer%3D%26signature%3DUfusKVB5qVi2P5g5%252FFFf6oOFynk%253D')">배경1</button>
+  <button onclick="changePart('bg', 'bg2.png')">배경2</button>
 
-  <h2>3번 빈칸</h2>
-  <div data-slot="3">
-    <button>노래하기</button>
-    <button>그림그리기</button>
-    <button>책읽기</button>
-  </div>
+  <h3>몸통 선택</h3>
+  <button onclick="changePart('body', 'https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdna%2FbD1jdr%2FbtsPVeNLW4b%2FAAAAAAAAAAAAAAAAAAAAAF_2vniDt1UHNX1RxJahpYJMgBE5wIS8-e8bzxsXuWeM%2Fimg.png%3Fcredential%3DyqXZFxpELC7KVnFOS48ylbz2pIh7yKj8%26expires%3D1756652399%26allow_ip%3D%26allow_referer%3D%26signature%3DgKnE5JHvLX2uvqmDFTy%252F%252FDnaIew%253D')">몸통1</button>
+  <button onclick="changePart('body', 'body2.png')">몸통2</button>
 
-  <script>
-    document.querySelectorAll('div[data-slot] button').forEach(btn => {
-      btn.addEventListener('click', () => {
-        const slotNum = btn.parentElement.dataset.slot;
-        document.getElementById(`slot${slotNum}`).textContent = btn.textContent;
-      });
-    });
-  </script>
+  <h3>표정 선택</h3>
+  <button onclick="changePart('face', 'https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdna%2FLMBZt%2FbtsPUKF8mar%2FAAAAAAAAAAAAAAAAAAAAABK40oHeKxcHA6lAMUtrLKS9CrUPjPwBO1btle8aEw16%2Fimg.png%3Fcredential%3DyqXZFxpELC7KVnFOS48ylbz2pIh7yKj8%26expires%3D1756652399%26allow_ip%3D%26allow_referer%3D%26signature%3DZ3Xe6P%252FJugGFt6J1OD%252B89gr6gt0%253D')">웃음</button>
+  <button onclick="changePart('face', 'face2.png')">윙크</button>
+
+  <h3>모자 선택</h3>
+  <button onclick="changePart('hat', 'https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdna%2FcQVcVR%2FbtsPVCU7HPB%2FAAAAAAAAAAAAAAAAAAAAADHT9HdbA1X7VY-bdrnYHCYnhMFXs6Wl2Rlgq3Gh181E%2Fimg.png%3Fcredential%3DyqXZFxpELC7KVnFOS48ylbz2pIh7yKj8%26expires%3D1756652399%26allow_ip%3D%26allow_referer%3D%26signature%3DsH%252BdQiv23I20P%252Bg7oZmHZgfCdpw%253D')">모자1</button>
+  <button onclick="changePart('hat', 'hat2.png')">모자2</button>
+  <button onclick="changePart('hat', '')">없음</button>
+
+  <h3>손에 든 것 선택</h3>
+  <button onclick="changePart('item', 'https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdna%2F6T752%2FbtsPUQsPuNg%2FAAAAAAAAAAAAAAAAAAAAAE8I3j_h-_fn4m4mEaZ1U21SnAp9Gvqp8Z7wNq2brvgw%2Fimg.png%3Fcredential%3DyqXZFxpELC7KVnFOS48ylbz2pIh7yKj8%26expires%3D1756652399%26allow_ip%3D%26allow_referer%3D%26signature%3D%252Bdk66ug5ps7pfzZwpU6dRV9XU8s%253D')">커피</button>
+  <button onclick="changePart('item', 'item2.png')">책</button>
+  <button onclick="changePart('item', '')">없음</button>
+</div>
+
+<script>
+  function changePart(partId, filename) {
+    document.getElementById(partId).src = filename;
+  }
+</script>
+
 </body>
 </html>
